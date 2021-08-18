@@ -1,0 +1,126 @@
+﻿PlayerInfo {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    height: 30px;
+    width: 250px;
+    border-radius: 8px;
+    background-color: rgba(0,0,10,0.78);
+    flex-direction: column;
+
+    &.active {
+        height: 120px;    }
+
+    .JobBar {
+        position: relative;
+        border-radius: 8px;
+        top: 0px;
+        left: 0px;
+        width: 170px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.noRound {
+            background-color: rgba(100,100,100,0.78);
+        }
+
+        &.traitor {
+            background-color: rgba(200,25,25,0.78);
+        }
+
+        &.innocent {
+            background-color: rgba(25,200,25,0.78);
+        }
+
+        &.detective {
+            background-color: rgba(25,25,200,0.78);
+        }
+    }
+
+    .HealthBarBack {
+        position: relative;
+        align-self: center;
+        top: 10px;
+        padding: 1px;
+        width: 230px;
+        height: 27px;
+        background-color: rgba(100,25,25,0.87);
+        border-radius: 8px;
+        display: none;
+
+        &.active {
+            display: flex;
+        }
+    }
+
+    .HealthBarFill {
+        position: relative;
+        align-self: flex-start;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(200,50,50,0.98);
+        border-radius: 8px;
+    }
+
+    .AmmoBarBack {
+        position: relative;
+        align-self: center;
+        top: 20px;
+        padding: 1px;
+        width: 230px;
+        height: 27px;
+        background-color: rgba(20,20,5,0.87);
+        border-radius: 8px;
+        display: none;
+
+        &.active {
+            display: flex;
+        }
+    }
+
+    .AmmoBarFill {
+        position: relative;
+        align-self: flex-start;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(205,155,0,1);
+        border-radius: 8px;
+    }
+
+    .JobName {
+        position: absolute;
+        text-shadow: 2px 2px black;
+        font-family: 'Trebuchet MS';
+        font-weight: 700;
+        font-size: 24px;
+        color: white;
+        bottom: 2px; // basically that's to allign it vertically.
+    }
+
+    .TimeLeft {
+        position: absolute;
+        top: -2px; // basically that's to allign it vertically.
+        right: 10px;
+        text-shadow: 2px 2px black;
+        font-family: 'Trebuchet MS';
+        font-weight: 700;
+        font-size: 24px;
+        color: white;
+    }
+
+    .AmmoHealth {
+        position: absolute;
+        text-shadow: 2px 2px black;
+        font-family: 'Trebuchet MS';
+        font-weight: 700;
+        text-align: center;
+        bottom: 0px;
+        right: 20px;
+        font-size: 24px;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+    }
+}

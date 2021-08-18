@@ -1,0 +1,178 @@
+﻿.scoreboard {
+    position: absolute;
+    z-index: 100;
+    flex-direction: column;
+    border-radius: 8px;
+    top: 10%;
+    left: 20%;
+    width: 60%;
+    background-color: rgba( 30, 30, 30, 0.92 );
+    transition: all 0.1s ease-out;
+    opacity: 0;
+
+    .logo {
+        // pretty dirty...
+        position: absolute;
+        top: -72px;
+        left: -20px;
+        width: 200px;
+        height: 200px;
+        background-repeat: no-repeat;
+    }
+
+    .playingOn {
+        font-family: 'Trebuchet MS';
+        font-weight: 600;
+        font-size: 14px;
+        text-align: right;
+        color: white;
+        padding: 8px;
+        padding-bottom: 17px;
+        padding-top: 3px;
+        vertical-align: middle;
+    }
+
+    .serverName {
+        position: absolute;
+        font-family: 'Trebuchet MS';
+        font-weight: 600;
+        font-size: 24px;
+        color: black;
+        right: 10px;
+        bottom: 2px; // thats bad, but its to align it...
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    .serverBar {
+        width: 100%;
+        height: 32px;
+        background-color: rgba(220,180,0,1);
+        border-radius: 8px;
+        margin-bottom: 30px;
+        //margin: -15px;
+    }
+
+    .playersList {
+        background-color: rgba(20,20,20,0.58);
+        background-image: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(75,75,75,0.39) 50%);
+        background-repeat: repeat;
+        background-size: 100% 50px;
+        flex-direction: column;
+        border-radius: 8px;
+        margin: 8px;
+    }
+
+    &.open {
+        opacity: 1;
+        transform: scale( 1 );
+    }
+    .profilePicture{
+        width: 24px;
+
+    }
+    .name {
+        text-align: left;
+        flex-grow: 1;
+        width: 80%;
+        padding-top: 2px;
+        padding-left: 10px;
+    }
+
+    .deaths, .score, .karma, .ping {
+        width: 50px;
+        font-family: 'Trebuchet MS';
+        font-weight: 600;
+        font-size: 14px;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 2px;
+        background-color: rgba(0,0,0,0.39); // darken bg
+        &.noBack {
+            background-color: rgba(0,0,0,0);
+            right: 8px;
+        }
+    }
+
+    .header {
+        font-family: 'Trebuchet MS';
+        font-weight: 600;
+        font-size: 14px;
+        color: white;
+        min-width: 30%;
+    }
+
+    .separator {
+        border-radius: 8px;
+        display: inline-block;
+        height: 21px;
+        align-self: flex-start;
+        margin-bottom: 4px;
+
+        &.terror {
+            background-color: rgba(0,200,0,0.39);
+        }
+
+        &.spectators {
+            background-color: rgba(200,200,0,0.39);
+        }
+
+        &.mia {
+            background-color: rgba(130,190,130,0.39);
+        }
+
+        &.confirmed {
+            background-color: rgba(130,170,10,0.39);
+        }
+
+        .separatorLabel {
+            font-family: 'Trebuchet MS';
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-shadow: 1px rgba(0,0,0,0.78);
+        }
+    }
+
+    .canvas {
+        flex-direction: column;
+        color: white;
+
+        .entry {
+            height: 25px;
+            font-family: 'Trebuchet MS';
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            vertical-align: middle;
+
+            .detailsList {
+                //background-color: black;
+            }
+
+            &.me {
+                color: yellow;
+            }
+
+            &.dev {
+                color: rgba(100, 240, 105,255);
+            }
+
+            &.admin {
+                color: rgba(220,180,0,255);
+            }
+
+            &.detective {
+                background-color: rgba(0,0,255, 0.11);
+            }
+
+            &.traitor {
+                background-color: rgba(255,0,0, 0.11);
+            }
+        }
+    }
+}

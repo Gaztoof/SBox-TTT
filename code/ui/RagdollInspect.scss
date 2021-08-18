@@ -1,0 +1,112 @@
+﻿RagdollInspect {
+    position: absolute;
+    width: 425px;
+    height: 260px;
+    background-color: rgba(0, 0, 10, 0.78);
+    border-radius: 3px;
+    display: none;
+    flex-direction: column;
+    pointer-events: none;
+    justify-self: center;
+    align-self: center;
+
+
+    &.active {
+        pointer-events: all;
+        display: flex;
+    }
+
+    .Header {
+        position: relative;
+        background-color: rgba(0, 0, 10, 0.3);
+        border-radius: 3px 3px 0px 0px;
+        height: 24px;
+        width: 100%;
+        --padding: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    Label {
+        color: white;
+        margin-left: 8px;
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .Elements {
+        display: flex;
+        flex-direction: row;
+        margin: 10px;
+
+        .Element {
+            width: 60px;
+            height: 60px;
+            margin-right: 4px;
+
+            Image {
+                width: 100%;
+            }
+
+            &.active {
+                width: 58px;
+                height: 58px;
+                border: 1px solid yellow;
+            }
+        }
+    }
+
+    .InfoBar {
+        color: rgba(220, 220, 220, 1);
+        padding: 10px;
+        font: 12px arial;
+        margin: 10px;
+        background-color: rgba(0, 0, 10, 0.4);
+        border: 1px solid black;
+        display: flex;
+
+        Image {
+            width: 1000%;
+            max-width: 60px;
+            height: 60px;
+            
+            //margin-right: 18px;
+        }
+    }
+
+    Buttons {
+        display: flex;
+        flex-direction: row;
+        margin: 10px;
+        margin-top: 40px;
+    }
+
+    .Button {
+        background-color: rgba(0, 0, 10, 0.9);
+        color: white;
+        font: 12px arial;
+        border-radius: 8px;
+        width: 120px;
+        height: 30px;
+        margin: 10px;
+        margin-right: 6px;
+        top: 6px;
+        align-content: center;
+        justify-content: center;
+
+        Label {
+            font-family: Poppins;
+            font-weight: 500;
+            font-size: 14px;
+            top: 5px;
+            margin-left: 0px;
+            text-align: center;
+        }
+
+        &:hover {
+            background-color: rgba(black, 0.4);
+        }
+    }
+}
