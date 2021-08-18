@@ -292,6 +292,7 @@ public partial class Player : Sandbox.Player
 
 	public override void Simulate( Client cl )
 	{
+		// called on client and server
 		base.Simulate( cl );
 
 		if ( Input.ActiveChild != null )
@@ -342,21 +343,23 @@ public partial class Player : Sandbox.Player
 				timeSinceDropped = 0;
 			}
 		}
-
-		float FallSpeed = (Velocity * Rotation.Down).z;
-		float FallDamage = (float)Math.Pow( 0.05f * (FallSpeed - 420.0f), 1.75f );
-		if ( timeSinceFall > 0.02f && FallSpeed > 450 && IsOnGround() && !controller.HasTag( "noclip" ) && FallDamage > 0 )
+		using ( Prediction.Off() )
 		{
-			var dmg = new DamageInfo()
+			float FallSpeed = (Velocity * Rotation.Down).z;
+			float FallDamage = (float)Math.Pow( 0.05f * (FallSpeed - 420.0f), 1.75f );
+			if ( timeSinceFall > 0.02f && FallSpeed > 450 && IsOnGround() && !controller.HasTag( "noclip" ) && FallDamage > 0 )
 			{
-				Position = Position,
-				Damage = FallDamage,
-				Flags = DamageFlags.Fall
-			};
+				var dmg = new DamageInfo()
+				{
+					Position = Position,
+					Damage = FallDamage,
+					Flags = DamageFlags.Fall
+				};
 
-			PlaySound( "dm.ui_attacker" );
-			TakeDamage( dmg );
-			timeSinceFall = 0;
+				PlaySound( "dm.ui_attacker" );
+				TakeDamage( dmg );
+				timeSinceFall = 0;
+			}
 		}
 
 		// noclip if double jump
