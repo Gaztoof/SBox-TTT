@@ -30,7 +30,6 @@ public class PlayerInfo : Panel
 	}
 	private void SetHUDRoundPhase( TTTRound round, bool isSpectating)
 	{
-		Log.Info( round.GetRoundPhase() );
 		if ( round.GetRoundPhase() == TTTRound.RoundPhase.InGame )
 		{
 			timeLeft.SetText( $"{round.TimeLeftString}" );

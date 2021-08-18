@@ -56,7 +56,7 @@ public partial class Player : Sandbox.Player
 	//[Net, Predicted] public Dictionary<AmmoType, int> ammos { get; set; } = new();
 
 	[ConVar.ClientData( "ttt_spectator_mode", Help = "Spectator-only mode. True or false", Saved = true )]
-	public string spectatorOnlyCVar { get; set; } = "true";
+	public string spectatorOnlyCVar { get; set; } = "false";
 	public bool spectatorOnly { get {
 			var owner = GetClientOwner();
 			if ( owner == null ) return false;
