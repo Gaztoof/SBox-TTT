@@ -52,6 +52,7 @@ public partial class Player : Sandbox.Player
 
 	[Net, Local] public Role previousRole { get; set; } = Role.Spectator;
 	[Net] public Team team { get; set; }
+	private TimeSince timeSinceFall;
 
 	//[Net, Predicted] public Dictionary<AmmoType, int> ammos { get; set; } = new();
 
@@ -342,6 +343,22 @@ public partial class Player : Sandbox.Player
 			}
 		}
 
+		float FallSpeed = (Velocity * Rotation.Down).z;
+		float FallDamage = (float)Math.Pow( 0.05f * (FallSpeed - 420.0f), 1.75f );
+		if ( timeSinceFall > 0.02f && FallSpeed > 450 && IsOnGround() && !controller.HasTag( "noclip" ) && FallDamage > 0 )
+		{
+			var dmg = new DamageInfo()
+			{
+				Position = Position,
+				Damage = FallDamage,
+				Flags = DamageFlags.Fall
+			};
+
+			PlaySound( "dm.ui_attacker" );
+			TakeDamage( dmg );
+			timeSinceFall = 0;
+		}
+
 		// noclip if double jump
 		/*if ( Input.Released( InputButton.Jump ) )
 		{
@@ -373,6 +390,15 @@ public partial class Player : Sandbox.Player
 			return true;
 		}
 		return false;
+	}
+	public bool IsOnGround()
+	{
+		var tr = Trace.Ray( Position, Position + Vector3.Down * 20 )
+				.Radius( 1 )
+				.Ignore( this )
+				.Run();
+
+		return tr.Hit;
 	}
 
 	// TODO
