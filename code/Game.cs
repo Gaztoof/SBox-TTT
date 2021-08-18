@@ -156,6 +156,7 @@ partial class Game : Sandbox.Game
 	}
 
 	// add timeout to this!!!! ppl can just spam it :(
+	// TO-DO: DetectiveCalled networked bool on PlayerRagdoll, and call only if false, else set to true and call
 	[ServerCmd]
 	public static void CallDetective()
 	{
