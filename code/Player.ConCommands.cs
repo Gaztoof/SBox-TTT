@@ -1,9 +1,11 @@
 ﻿using Sandbox;
+using System;
+using System.Linq;
 
 public partial class Player
 {
 	[ServerCmd( "giveammo" )]
-	public static void SetInventoryCurrent( string ammotype, int count )
+	public static void GiveAmmo( string ammotype, int count )
 	{
 		var target = ConsoleSystem.Caller.Pawn as Player;
 		if ( target == null ) return;
@@ -11,18 +13,13 @@ public partial class Player
 		var inventory = target.Inventory;
 		if ( inventory == null )
 			return;
-
-		switch ( ammotype.ToLower() )
+		foreach(var elem in Enum.GetValues( typeof( AmmoType ) ).Cast<AmmoType>())
 		{
-			case "pistol":
-				target.GiveAmmo( AmmoType.Pistol, count );
+			if ( elem.ToString().ToLower() == ammotype )
+			{
+				target.GiveAmmo( elem, count );
 				break;
-			case "shotgun":
-				target.GiveAmmo( AmmoType.Shotgun, count );
-				break;
-			case "smg":
-				target.GiveAmmo( AmmoType.SMG, count );
-				break;
+			}
 		}
 	}
 	[ServerCmd( "inventory_current" )]

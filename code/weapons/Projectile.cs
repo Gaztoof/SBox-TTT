@@ -44,7 +44,7 @@ public class Projectile : BasePhysics
 
 		if ( e is WaterFunc ) return;
 
-		if ( e is Player p )
+		if ( e is Player )
 		{
 			if ( DestroyOnPlayerImpact ) ExplodeOrDestroy();
 		}

@@ -33,9 +33,10 @@ public class CrossbowBolt : Projectile
 {
 	// Temporary, projectiles need some more work
 	public override bool DestroyOnPlayerImpact => true;
-	public override bool DestroyOnWorldImpact => true;
+	public override bool DestroyOnWorldImpact => false;
+	public override float Force => 0.001f;
 
 	public override bool StickInWalls => true;
 
-	public override string ModelPath => "models/light_arrow.vmdl";
+	public override string ModelPath => "models/arrow_wooden/arrow_wooden.vmdl";
 }

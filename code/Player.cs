@@ -155,6 +155,7 @@ public partial class Player : Sandbox.Player
 			Inventory.Add( new Crossbow() );
 			Inventory.Add( new SMG() );
 			Inventory.Add( new Knife() );
+			//Inventory.Add( new LR300() );
 
 			ClearAmmo();
 			GiveAmmo( AmmoType.Pistol, 32 );

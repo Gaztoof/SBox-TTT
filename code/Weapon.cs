@@ -64,6 +64,7 @@ public partial class Weapon : BaseWeapon
 	public virtual float DeployTime => .75f;
 	public virtual bool CanAim => false;
 	public virtual float HeadshotMultiplier => 3.0f;
+	public virtual int ReloadDelay => 0;
 
 	// Burst fire
 	public virtual int ShotsPerTriggerPull => 1;
@@ -79,6 +80,7 @@ public partial class Weapon : BaseWeapon
 	public virtual string MuzzleFlash => "particles/pistol_muzzleflash.vpcf";
 	public virtual string Brass => "particles/pistol_ejectbrass.vpcf";
 	public virtual string Name => "Weapon";
+	public virtual string DeploySound => "";
 
 	public int AvailableAmmo
 	{
@@ -104,6 +106,15 @@ public partial class Weapon : BaseWeapon
 
 		TimeSinceDeployed = 0;
 		IsReloading = false;
+		OnDeploy();
+	}
+	[ClientRpc]
+	public virtual void OnDeploy()
+	{
+		using ( Prediction.Off() )
+		{
+			PlaySound( DeploySound );
+		}
 	}
 	public override void Spawn()
 	{

@@ -5,7 +5,9 @@ using System.Linq;
 partial class Weapon
 {
 	public static bool UseClientSideHitreg = false;
-	public static SoundEvent Dryfire = new SoundEvent( "weapons/rust_shotgun/sounds/rust-shotgun-dryfire.vsnd" );
+	public virtual string Dryfire => "rust_smg.dryfire";
+	public virtual string PumpSound => "";
+
 	public int BurstShotsRemaining = 0;
 	public int ShotsThisBurst => Math.Min( AmmoClip, ShotsPerTriggerPull );
 
@@ -65,7 +67,6 @@ partial class Weapon
 				IsReloading = false;
 
 				ShootEffects();
-				PlaySound( ShootShound );
 
 				if ( Projectile != null ) ShootProjectile( Projectile, Spread, ProjectileSpeed, Force, Damage, BulletsPerShot );
 				else ShootBullet( Spread, Force, Damage, BulletSize, BulletsPerShot, DamageFlags );
@@ -74,14 +75,25 @@ partial class Weapon
 			}
 		}
 	}
+	// that loops, make it single like attackprimary
 	public override void AttackSecondary()
 	{
-		if ( CanAim && !(Owner as AnimEntity).GetAnimBool( "b_aiming" ) )
+		if ( ViewModelEntity is not ViewModel viewModel ) return;
+		if ( CanAim )
 		{
-			Log.Info( "setb" );
-			(Owner as AnimEntity).SetAnimBool( "b_aiming", true );
-			Log.Info( "secondary" );
+			if ( !viewModel.GetAnimBool( "ads" ) )
+			{
+				// to anyone reading this: i can't get the viewModel to move on the screen like it does on rust...
+				// start aim sound
+				viewModel.SetAnimBool( "ads", true );
+			}
+			else
+			{
+				// stop aim sound
+				viewModel.SetAnimBool( "ads", false );
+			}
 		}
+		viewModel.Position = Position + new Vector3( 100, 100, 100 );
 	}
 	public void ShootProjectile( string projectile, float spread, float projectilespeed, float force, float damage, int count = 1, DamageFlags flags = DamageFlags.Bullet )
 	{
@@ -110,6 +122,7 @@ partial class Weapon
 				pp.Force = force;
 				pp.Weapon = this;
 				pp.DamageFlags = flags;
+				pp.DeleteAsync( 100f );
 			}
 		}
 	}
@@ -195,7 +208,7 @@ partial class Weapon
 	}
 
 	[ClientRpc]
-	protected virtual void ShootEffects()
+	public virtual void ShootEffects()
 	{
 		Host.AssertClient();
 
@@ -210,6 +223,10 @@ partial class Weapon
 		}
 
 		ViewModelEntity?.SetAnimBool( "fire", true );
+		using ( Prediction.Off() )
+		{
+			PlaySound( ShootShound );
+		}
 		//if ( CrosshairPanel is Crosshair c ) c.fireCounter += 2;
 	}
 	public bool TakeAmmo( int amount )
@@ -222,7 +239,8 @@ partial class Weapon
 	}
 	public virtual void DryFire()
 	{
-		PlaySound( "Weapon.Dryfire" );
+		PlaySound( Dryfire );
+		ViewModelEntity?.SetAnimBool( "dryfire", true );
 
 		if ( !IsReloading ) Reload();
 	}

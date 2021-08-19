@@ -2,7 +2,6 @@
 
 partial class Weapon
 {
-
 	public override void Reload()
 	{
 		if ( IsReloading && !ReloadMagazine ) (Owner as AnimEntity).SetAnimBool( "reload", true );
@@ -29,11 +28,14 @@ partial class Weapon
 		{
 			AmmoClip += OwnerTakeAmmo( AmmoType, ClipSize - AmmoClip );
 			IsReloading = false;
+			StartAmmoReloadEffects();
 		}
 		else
 		{
 			if ( AmmoClip >= ClipSize )
 				return;
+
+			StartAmmoReloadEffects();
 
 			AmmoClip++;
 
@@ -45,6 +47,8 @@ partial class Weapon
 			else
 			{
 				ViewModelEntity?.SetAnimBool( "reload_finished", true );
+
+				FinishReloadEffects();
 				IsReloading = false;
 			}
 		}
@@ -55,5 +59,14 @@ partial class Weapon
 		ViewModelEntity?.SetAnimBool( "reload", true );
 
 		// TODO - player third person model reload
+	}
+	[ClientRpc]
+	public virtual void FinishReloadEffects()
+	{
+		ViewModelEntity?.SetAnimBool( "reload_finished", true );
+	}
+	[ClientRpc]
+	public virtual void StartAmmoReloadEffects()
+	{
 	}
 }

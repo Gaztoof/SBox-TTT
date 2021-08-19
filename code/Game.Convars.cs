@@ -64,6 +64,6 @@ public partial class Game
 		public static bool HighlightAdmins { get; set; } = true;
 
 		[ServerVar( "ttt_infinite_ammos", Help = "Infinite ammos cheat.", Saved = true )]
-		public static bool InfiniteAmmos { get; set; } = true;
+		public static bool InfiniteAmmos { get; set; } = false;
 	}
 }
