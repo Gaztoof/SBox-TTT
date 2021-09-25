@@ -14,7 +14,7 @@
 
 			if ( Host.IsServer )
 			{
-				Tint = Color.Random.ToColor32();
+				Tint = Color.Random;
 			}
 		}
 

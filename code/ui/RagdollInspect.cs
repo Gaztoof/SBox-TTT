@@ -130,7 +130,7 @@ public class RagdollInspect : Panel
 								break;
 							case Player.DeathType.Melee:
 								targetTexture = Texture.Load( "https://i.imgur.com/YvV5NBs.png", true );
-								x.SetText( "The body is bruised and battered. Clearly they were clubbes to death." );
+								x.SetText( "The body is bruised and battered. Clearly they were clubbed to death." );
 								break;
 							case Player.DeathType.Weapon:
 								targetTexture = Texture.Load( "https://i.imgur.com/eqyc9cW.png", true );
