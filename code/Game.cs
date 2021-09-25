@@ -1,4 +1,4 @@
-﻿using Sandbox;
+using Sandbox;
 using System.Threading.Tasks;
 using System.Linq;
 
@@ -128,7 +128,7 @@ partial class Game : Sandbox.Game
 			Karma.Killed( round.Players.First(x => x.GetClientOwner().SteamId == pawn.LastAttacker.GetClientOwner().SteamId ), round.Players.First( x => x.GetClientOwner().SteamId == client.SteamId ) );
 		if(pawn is Player)
 			Round?.OnPlayerKilled( pawn as Player );
-		base.OnKilled( client, pawn) ;
+		//base.OnKilled( client, pawn) ; //DO NOT SEND ANYTHING TO KILLFEED- KEEP COMMENTED OR DELETE
 	}
 	public override void ClientDisconnect( Client client, NetworkDisconnectionReason reason )
 	{
