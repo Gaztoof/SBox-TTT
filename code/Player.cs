@@ -58,12 +58,7 @@ public partial class Player : Sandbox.Player
 
 	[ConVar.ClientData( "ttt_spectator_mode", Help = "Spectator-only mode. True or false", Saved = true )]
 	public string spectatorOnlyCVar { get; set; } = "false";
-	public bool spectatorOnly { get {
-			var owner = GetClientOwner();
-			if ( owner == null ) return false;
-			string state = owner.GetUserString( "ttt_spectator_mode" );
-			return state == null ? false : state.ToLower() == "true"; 
-		} }
+	public bool spectatorOnly { get; }
 
 
 	[Net] public float karma { get; set; } = 1000f;
